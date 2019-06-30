@@ -1,4 +1,4 @@
-socket = io.connect('http://localhost:8080');
+socket = io.connect('https://gentle-tundra-72456.herokuapp.com:8080');
 //socket = io.connect('http://192.168.1.18:8080');
 var size = 3;
 var index = 0;
