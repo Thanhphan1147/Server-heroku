@@ -168,6 +168,6 @@ setInterval( () => {
   }
 }, 1000/60);
 
-app.listen(port, function() {
-    console.log('Our app is running on http://localhost:' + port);
-});
+http.listen(port, function () {
+    console.log('listening on port' + port);
+})
