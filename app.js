@@ -6,6 +6,8 @@ var io = require('socket.io')(http);
 //Local modules
 const Player = require('./Player.js');
 
+var port = process.env.PORT || 8080;
+
 //Variables and function declaration
 var index = 0;
 var size = 4;
@@ -166,6 +168,6 @@ setInterval( () => {
   }
 }, 1000/60);
 
-http.listen(8080, function () {
-    console.log('listening on port 8080');
-})
+app.listen(port, function() {
+    console.log('Our app is running on http://localhost:' + port);
+});
