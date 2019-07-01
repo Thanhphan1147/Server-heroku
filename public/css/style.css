@@ -47,16 +47,16 @@ body {
   background-color: 'Teal';
 }
 /* status */
-#position {
+#chat-box {
 	position: absolute;
 	top: 100px;
-	left: 200px;
+	left: 900px;
 	z-index: 3;
 	height: 100px;
   width: 200px;
 	font-family: "Comic Sans MS", cursive, sans-serif;
 	font-size: large;
-  background: transparent;
+  background-color: 'Red';
 }
 
 
