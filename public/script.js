@@ -2,6 +2,12 @@ socket = io();  // io() auto discover
 //socket = io.connect('http://localhost:8080');
 var size = 3;
 var index = 0;
+var col = "Red"
+var preload = {
+    name: "N/A",
+    color: col               //red by defaut
+}
+
 var key = {
     id: 'N/A',
     dx: 0,
@@ -14,15 +20,35 @@ var mouse = {
     x: 0,
     y: 0
 }
+/*
+setInterval( () => {
+  console.log(col);
+}, 500)
+**/
+function setColor1() {
+  col = "Blue";
+}
+function setColor2() {
+  col = "Green";
+}
+function setColor3() {
+  col = "Teal";
+}
+function setColor4() {
+  col = "Yellow";
+}
+function setColor5() {
+  col = "Pink";
+}
+function setColor6() {
+  col = "Black";
+}
 
 function Preload() {
     var preloaddiv = document.getElementById('preload');
     var pl = document.getElementById('pl');
-    var col = document.getElementById('col');
-    var preload = {
-        name: pl.value,
-        color: col.value
-    }
+    preload.name = pl;
+    preload.color = col;
     preloaddiv.style.display = 'none';
     socket.emit('newplayer', JSON.stringify(preload));
 }

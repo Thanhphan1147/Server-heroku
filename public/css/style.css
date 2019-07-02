@@ -6,8 +6,10 @@ body {
 	font : 15px/1.5 Arial, Helvetica,sans-serif;
 	padding :0;
 	margin:0;
-	background-color: #F2F3F3
-
+  background-image: url("top-down-ice.jpg");
+  background-size: cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
 }
 
 /* canvas */
@@ -67,12 +69,14 @@ body {
 	overflow:hidden;
 }
 
+.card-body { background-color: rgba(245, 245, 245, 0.4) !important; }
+
 ul{
 	margin:0;
 	padding:0;
 }
 
-/*Header**/
+/*
 header{
 	background:#2b363c;
 	color:#ffffff;
@@ -119,7 +123,6 @@ header a:hover{
 	font-weight:bold;
 }
 
-
 /* Body**/
 
 #gamesettings{
@@ -128,12 +131,14 @@ header a:hover{
 }
 
 /*Name selection **/
+/*
 #nameselection{
 	background:#2b363c;
 	color:#ffffff;
 	padding:5px;
-
 }
+**/
+
 #nameselection h1{
 	text-align:center;
 }

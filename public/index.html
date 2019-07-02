@@ -9,7 +9,11 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="gamename" content="GameAttempt">
-
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 	<title>Multiplayer-Server-Test | Welcome</title>
 
@@ -47,51 +51,89 @@
 
 
 	<header>
-		<div class="container">
-			<div id="gamename">
-				<h1><span class="highlight">M</span>ulti-<span class="highlight">P</span>layer-<span class="highlight">S</span>erver</h1>
-				<!--<img src="./img/logo1.png">-->
-			</div>
-			<nav>
-				<ul>
-					<li class="current"><a href="index.html">Home</a></li>
-					<li><a href="index.html">Rules</a></li>
-				</ul>
-			</nav>
-
-
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+  		<a class="navbar-brand" href="#">Multiplayer-server-local</a>
+			<ul class="navbar-nav mr-auto">
+    		<li class="nav-item active">
+      		<a class="nav-link" href="#">Home</a>
+    		</li>
+    		<li class="nav-item">
+      		<a class="nav-link" href="#">Useless button 2</a>
+    		</li>
+    		<li class="nav-item">
+		      <a class="nav-link" href="#">Useless button 2</a>
+    		</li>
+  		</ul>
+			<ul class="nav navbar-nav navbar-right">
+	      <li class="nav-item">
+					<a class="nav-link" href="https://www.facebook.com/phan.trungthanh.3"><i class="fab fa-facebook"></i> Facebook</a>
+				</li>
+	      <li>
+					<a class="nav-link" href="https://github.com/Thanhphan1147/Server-heroku"><i class="fab fa-github"></i></span> Github</a>
+				</li>
+	    </ul>
+		</nav>
+<!--
+		<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">Multiplayer-server-local</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li class="active"><a href="#">Home</a></li>
+	      <li><a href="#">Useless button 1</a></li>
+	      <li><a href="#">Useless button 2</a></li>
+	    </ul>
+	    <ul class="nav navbar-nav navbar-right">
+	      <li><a href="https://www.facebook.com/phan.trungthanh.3"><span class="glyphicon glyphicon-user"></span> Facebook</a></li>
+	      <li><a href="https://github.com/Thanhphan1147/Server-heroku"><span class="glyphicon glyphicon-link"></span> Github</a></li>
+	    </ul>
+	  </div>
+	</nav> -->
 	</header>
 
 <body>
-
-
 	<section id="gamesettings">
 		<div id="preload">
-
-			<div id="nameselection">
-				<form action="" method="">
-					<h1><input id="pl" type="text" name="name" placeholder="Enter Your Name ..."></h1>
-				</form>
+			<div class="container">
+				<div class="card-deck">
+					<div class="card border border-dark bg-light">
+						<div class="card-body">
+							<div class="card-body text-left">
+					      <p class="card-text">Test version for bootstrap home page</p>
+								<p class="card-text">Reserved for update log</p>
+								<p class="card-text">bootstrap = noob css</p>
+								<p class="card-text">Some text inside the first card</p>
+					    </div>
+						</div>
+					</div>
+			    <div class="card border border-dark bg-light">
+						<div class="card-body">
+							<div id="nameselection">
+								<form action="" method="">
+									<h1><input id="pl" type="text" name="name" placeholder="Enter Your Name ..."></h1>
+								</form>
+							</div>
+							<div id="playbutton">
+								<button onclick="Preload()" class="playbutton">Play</button>
+							</div>
+						</div>
+			    </div>
+			    <div class="card border border-dark bg-secondary">
+						<div class="card-body">
+							<h3>Choose your color</h3>
+				  		<button type="button" class="m-1 btn btn-primary" onclick="setColor1()">Blue</button>
+				  		<button type="button" class="m-1 btn btn-success" onclick="setColor2()">Green</button>
+				  		<button type="button" class="m-1 btn btn-info" onclick="setColor3()">Teal</button>
+				  		<button type="button" class="m-1 btn btn-warning" onclick="setColor4()">Yellow</button>
+				  		<button type="button" class="m-1 btn btn-danger" onclick="setColor5()">Pink</button>
+				  		<button type="button" class="m-1 btn btn-dark" onclick="setColor6()">Black</button>
+						</div>
+					</div>
+				</div>
 			</div>
+		 </div>
 
-			<div id="colorselection">
-				<h1>Player color :</h1>
-				<select id="col">
-					<option value="red">Red</option>
-					<option value="blue">Blue</option>
-					<option value="yellow">Yellow</option>
-					<option value="violet">Violet</option>
-					<option value="green">Green</option>
-					<option value="teal">Teal</option>
-					<option value="gray">Gray</option>
-					<option value="black">Black</option>
-				</select>
-			</div>
-
-			<div id="playbutton">
-				<button onclick="Preload()" class="playbutton">Play</button>
-			</div>
-		</div>
 
 		<div id="chat-box"></div>
 		<div id="hub"></div>
