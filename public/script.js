@@ -33,7 +33,7 @@ function init() {
     if (game.init()) {
         console.log("init");
         game.start();
-        game.position.innerHTML = 'testing chat-box';
+        game.chat.innerHTML = 'testing chat-box';
     }
 }
 
