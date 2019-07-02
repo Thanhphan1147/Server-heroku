@@ -6,7 +6,7 @@ body {
 	font : 15px/1.5 Arial, Helvetica,sans-serif;
 	padding :0;
 	margin:0;
-  background-image: url("top-down-ice.jpg");
+  background-image: url("top-down-grassland.jpg");
   background-size: cover;
   background-repeat:   no-repeat;
   background-position: center center;
@@ -15,7 +15,7 @@ body {
 /* canvas */
 #canvas3 {
 	position: absolute;
-	top: 100px;
+	top: 0px;
 	left: 0px;
 	z-index: 2;
 	background: transparent;
@@ -23,7 +23,7 @@ body {
 
 #canvas2 {
 	position: absolute;
-	top: 100px;
+	top: 0px;
 	left: 0px;
 	z-index: 0;
 	background: transparent;
@@ -31,7 +31,7 @@ body {
 
 #canvas {
 	position: absolute;
-	top: 100px;
+	top: 0px;
 	left: 0px;
 	z-index: 1;
 }

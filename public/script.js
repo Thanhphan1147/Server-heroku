@@ -84,13 +84,13 @@ function Game() {
             Arrow.prototype.context = this.canvas3.getContext('2d');
 
             this.canvas.width = window.innerWidth;
-            this.canvas.height = window.innerHeight - 100;
+            this.canvas.height = window.innerHeight;
 
             this.canvas2.width = window.innerWidth;
-            this.canvas2.height = window.innerHeight - 100;
+            this.canvas2.height = window.innerHeight;
 
             this.canvas3.width = window.innerWidth;
-            this.canvas3.height = window.innerHeight - 100;
+            this.canvas3.height = window.innerHeight;
 
             this.background = new Background();
             this.background.init(0, 0);
