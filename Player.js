@@ -11,6 +11,7 @@ module.exports = class Player {
     this.color = 'undefined';
     this.name = 'not connected';
     this.arrow = new Arrow();
+    this.health = 100;
   }
 
     init(x, y, color) {

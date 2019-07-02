@@ -316,7 +316,7 @@ function Player() {
         this.context.fillText(this.name, this.x - this.context.measureText(this.name).width / 2, this.y - this.r - this.r/6);
         //health  bar
         this.context.beginPath();
-        this.context.rect(this.x - 50, this.y + this.r + this.r/6, this.health, 20);
+        this.context.rect(this.x - 50, this.y + this.r + this.r/3, this.health, 10);
         this.context.fillStyle = 'green';
         this.context.fill();
         this.context.stroke();
