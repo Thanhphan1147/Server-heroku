@@ -33,7 +33,7 @@ function init() {
     if (game.init()) {
         console.log("init");
         game.start();
-        game.position.innerHTML = 'start';
+        game.position.innerHTML = 'testing chat-box';
     }
 }
 
@@ -41,7 +41,7 @@ function Game() {
     this.canvas3 = document.getElementById('canvas3');
     this.canvas2 = document.getElementById('canvas2');
     this.canvas = document.getElementById('canvas');
-    this.position = document.getElementById('position');
+    this.chat = document.getElementById('chat-box');
     this.hub = document.getElementById('hub');
 
     this.otherPlayers = [size];
