@@ -10,7 +10,7 @@ var port = process.env.PORT || 8080;
 
 //Variables and function declaration
 var index = 0;
-var size = 4;
+var size = 8;
 
 var pool = [size];
 

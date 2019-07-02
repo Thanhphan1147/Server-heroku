@@ -8,7 +8,7 @@ body {
 	margin:0;
   background-image: url("top-down-grassland.png");
   background-size: cover;
-  background-repeat:   no-repeat;
+  background-repeat: repeat;
   background-position: center center;
 }
 
