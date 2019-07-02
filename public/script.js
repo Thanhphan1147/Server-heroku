@@ -47,7 +47,7 @@ function setColor6() {
 function Preload() {
     var preloaddiv = document.getElementById('preload');
     var pl = document.getElementById('pl');
-    preload.name = pl;
+    preload.name = pl.value;
     preload.color = col;
     preloaddiv.style.display = 'none';
     socket.emit('newplayer', JSON.stringify(preload));
