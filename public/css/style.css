@@ -35,7 +35,7 @@ body {
 	left: 0px;
 	z-index: 1;
 }
-
+/**
 #hub {
 	position: absolute;
 	top: 100px;
@@ -48,13 +48,14 @@ body {
   background: transparent;
   background-color: 'Teal';
 }
+*/
 /* status */
 
 #chat-box {
 	z-index: 4;
   width: 300px;
 	font-family: "Comic Sans MS", cursive, sans-serif;
-	font-size: large;
+	font-size: medium;
   background-color: #ffffff;
   border: 1px solid black;
   opacity: 0.6;
@@ -63,6 +64,17 @@ body {
 }
 #text{
   overflow: scroll;
+}
+#hub{
+  z-index: 4;
+  width: 300px;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	font-size: medium;
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+  display: none;
 }
 /* Global stuff **/
 .container{

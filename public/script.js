@@ -2,7 +2,15 @@ socket = io();  // io() auto discover
 //socket = io.connect('http://192.168.100.9:8080');
 var size = 3;
 var index = 0;
-var col = "Red"
+var col = "Red";
+var stats = [size+1];
+for (var i = 0; i < size+1; i++) {
+  stats[i] = {
+    kills: 0,
+    name: "N/A"
+  }
+}
+console.log(stats);
 var preload = {
     name: "N/A",
     color: col               //red by defaut
@@ -47,12 +55,14 @@ function setColor6() {
 
 function Preload() {
     var preloaddiv = document.getElementById('preload');
-    var box = document.getElementById('chat-box');
+    var rbox = document.getElementById('chat-box');
+    var lbox = document.getElementById('hub');
     var pl = document.getElementById('pl');
     preload.name = pl.value;
     preload.color = col;
     preloaddiv.style.display = 'none';
-    box.style.display = 'block';
+    rbox.style.display = 'block';
+    lbox.style.display = 'block';
     socket.emit('newplayer', JSON.stringify(preload));
 }
 
@@ -82,7 +92,7 @@ function Game() {
     this.canvas2 = document.getElementById('canvas2');
     this.canvas = document.getElementById('canvas');
     this.chat = document.getElementById('text');
-    this.hub = document.getElementById('hub');
+    this.sta = document.getElementById('hub-content');
 
     this.otherPlayers = [size];
     for (var i = 0; i < size; i++) {
@@ -147,7 +157,7 @@ function Game() {
             });
 
             document.addEventListener('mousemove', function (e) {
-                var deg = Math.atan2( (e.pageX - game.player.x), - (e.pageY - 100 - game.player.y) ) - Math.PI/2;
+                var deg = Math.atan2( (e.pageX - game.player.x), - (e.pageY - game.player.y) ) - Math.PI/2;
                 //game.position.innerHTML = "rotation: " + deg;
                 key.angle = deg;
                 key.rotate = true;
@@ -183,6 +193,7 @@ function Game() {
 }
 
 function animate() {
+  //clearSelection();
     game.player.context.clearRect(0, 0, window.innerWidth, window.innerHeight);
     Arrow.prototype.context.clearRect(0, 0, window.innerWidth, window.innerHeight);
     game.player.draw();        //draw player
@@ -234,7 +245,7 @@ socket.on('player_data', (val) => {
 
 socket.on('addplayer', (val) => {
     var player = JSON.parse(val);
-    this.hub.innerHTML += player.name + " connected <br>";
+    game.chat.innerHTML += "<b>"+player.name + " connected</b><br>";
     if (player.id != game.player.id) {
         game.otherPlayers[index].id = player.id;
         game.otherPlayers[index].connected = true;
@@ -247,10 +258,48 @@ socket.on('addplayer', (val) => {
 socket.on('update', (val) => {
   var pos = JSON.parse(val);
   //console.log(game.player.id + ' ' + pos[game.player.id]);
+  for (var i = 0; i < pos.length; i++) {
+    if(pos[i].id === game.player.id) {
+      game.player.x = pos[i].x;
+      game.player.y = pos[i].y;
+      game.player.angle = pos[i].angle;
+      game.player.health = pos[i].health;
+      game.player.kills = pos[i].kills;
+      game.player.arrow.alive = pos[i].arrow.alive;
+      game.player.arrow.x = pos[i].arrow.x;
+    } else {
+      for (var j = 0; j < index; j++) {
+        if (game.otherPlayers[j].id === pos[i].id) {
+          game.otherPlayers[j].x = pos[i].x;
+          game.otherPlayers[j].y = pos[i].y;
+          game.otherPlayers[j].angle = pos[i].angle;
+          game.otherPlayers[j].health = pos[i].health;
+          game.otherPlayers[j].kills = pos[i].kills;
+          game.otherPlayers[j].arrow.alive = pos[i].arrow.alive;
+          game.otherPlayers[j].arrow.x = pos[i].arrow.x;
+        }
+      }
+    }
+  }
+  for (var i = 0; i < pos.length; i++) {
+    stats[i].name = pos[i].name;
+    stats[i].kills = pos[i].kills;
+  }
+  stats.sort(function(a, b){return b.kills-a.kills});
+  game.sta.innerHTML = "";
+  game.sta.innerHTML += "Leaderboard <br>";
+  for (var i = 0; i < stats.length; i++) {
+    if (stats[i].name != "not connected") {
+      var r = i+1;
+      game.sta.innerHTML += r+". "+stats[i].name+": "+stats[i].kills+" kills <br>";
+    }
+  }
+    /*                                                          Bugged version
   game.player.x = pos[game.player.id].x;
   game.player.y = pos[game.player.id].y;
   game.player.angle = pos[game.player.id].angle;
   game.player.health = pos[game.player.id].health;
+  game.player.kills = pos[game.player.id].kills;
   game.player.arrow.alive = pos[game.player.id].arrow.alive;
   game.player.arrow.x = pos[game.player.id].arrow.x;
   for (var i = 0; i < index; i++) {
@@ -259,9 +308,11 @@ socket.on('update', (val) => {
     game.otherPlayers[i].y = pos[game.otherPlayers[i].id].y;
     game.otherPlayers[i].angle = pos[game.otherPlayers[i].id].angle;
     game.otherPlayers[i].health = pos[game.otherPlayers[i].id].health;
+    game.otherPlayers[i].kills = pos[game.otherPlayers[i].id].kills;
     game.otherPlayers[i].arrow.alive = pos[game.otherPlayers[i].id].arrow.alive;
     game.otherPlayers[i].arrow.x = pos[game.otherPlayers[i].id].arrow.x;
   }
+  **/
 })
 
 socket.on('fire', (id) => {
@@ -296,6 +347,7 @@ function Player() {
     this.connected = false;
     this.colision = false;
     this.health = 100;
+    this.kills = 0;
 
     this.arrow = new Arrow();
 
@@ -335,7 +387,7 @@ function Player() {
         // player name
         this.context.font = "15px Comic Sans MS";
         this.context.fillStyle = 'black';
-        this.context.fillText(this.name, this.x - this.context.measureText(this.name).width / 2, this.y - this.r - this.r/6);
+        this.context.fillText(this.name+" kills: "+this.kills, this.x - this.context.measureText(this.name).width / 2, this.y - this.r - this.r/6);
         //health  bar
         this.context.beginPath();
         this.context.rect(this.x - 50, this.y + this.r + this.r/3, this.health, 10);
@@ -405,6 +457,15 @@ function Arrow() {
 
 //Arrow.prototype = new DrawableObj();
 Background.prototype = new DrawableObj();
+
+function clearSelection() {
+    if(document.selection && document.selection.empty) {
+        document.selection.empty();
+    } else if(window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+    }
+}
 
 window.requestAnimFrame = (function () {
     return window.requestAnimationFrame ||
