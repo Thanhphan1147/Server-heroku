@@ -123,6 +123,9 @@ function Game() {
                     case 68:
                         key.dx = +2;
                         break;
+                    case 13:
+                        sendMessage();
+                        break;
                 }
             });
 
