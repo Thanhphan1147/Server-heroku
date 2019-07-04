@@ -61,7 +61,9 @@ body {
   filter: alpha(opacity=60);
   display: none;
 }
-
+#text{
+  overflow: scroll;
+}
 /* Global stuff **/
 .container{
 	width:80%;
