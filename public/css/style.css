@@ -49,18 +49,18 @@ body {
   background-color: 'Teal';
 }
 /* status */
+
 #chat-box {
-	position: absolute;
-	top: 100px;
-	left: 900px;
-	z-index: 3;
-	height: 100px;
-  width: 200px;
+	z-index: 4;
+  width: 300px;
 	font-family: "Comic Sans MS", cursive, sans-serif;
 	font-size: large;
-  background-color: 'Red';
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+  display: none;
 }
-
 
 /* Global stuff **/
 .container{

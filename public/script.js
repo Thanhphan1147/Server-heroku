@@ -1,5 +1,5 @@
 socket = io();  // io() auto discover
-//socket = io.connect('http://localhost:8080');
+//socket = io.connect('http://192.168.100.9:8080');
 var size = 3;
 var index = 0;
 var col = "Red"
@@ -20,6 +20,7 @@ var mouse = {
     x: 0,
     y: 0
 }
+
 /*
 setInterval( () => {
   console.log(col);
@@ -46,11 +47,24 @@ function setColor6() {
 
 function Preload() {
     var preloaddiv = document.getElementById('preload');
+    var box = document.getElementById('chat-box');
     var pl = document.getElementById('pl');
     preload.name = pl.value;
     preload.color = col;
     preloaddiv.style.display = 'none';
+    box.style.display = 'block';
     socket.emit('newplayer', JSON.stringify(preload));
+}
+
+function sendMessage() {
+    var input = document.getElementById("input");
+    if(input.value != "") {
+      socket.emit("chat",JSON.stringify({
+        name: game.player.name,
+        data: input.value
+      }));
+      input.value = "";
+    }
 }
 
 var game = new Game();
@@ -59,7 +73,7 @@ function init() {
     if (game.init()) {
         console.log("init");
         game.start();
-        game.chat.innerHTML = 'testing chat-box';
+        game.chat.innerHTML += 'testing chat-box<br>';
     }
 }
 
@@ -67,7 +81,7 @@ function Game() {
     this.canvas3 = document.getElementById('canvas3');
     this.canvas2 = document.getElementById('canvas2');
     this.canvas = document.getElementById('canvas');
-    this.chat = document.getElementById('chat-box');
+    this.chat = document.getElementById('text');
     this.hub = document.getElementById('hub');
 
     this.otherPlayers = [size];
@@ -261,6 +275,11 @@ socket.on('fire', (id) => {
           }
       }
   }
+})
+
+socket.on('message', (mes) => {
+  var buf = JSON.parse(mes);
+  game.chat.innerHTML += buf.name+":  "+buf.data+"<br>";
 })
 
 function Player() {

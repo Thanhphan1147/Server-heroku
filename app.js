@@ -121,6 +121,10 @@ io.on('connection', (socket) => {
         }));
       }
     })
+
+    socket.on('chat', (mes) => {
+      io.emit('message',mes);
+    })
     socket.on('disconnect', () => {
         for (var i = 0; i < index; i++) {
             if (pool[i].socket === socket.id) {
