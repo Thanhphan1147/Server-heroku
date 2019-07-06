@@ -76,6 +76,16 @@ body {
   filter: alpha(opacity=60);
   display: none;
 }
+#tips{
+  z-index: 4;
+  width: 100px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-size: medium;
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+}
 /* Global stuff **/
 .container{
 	width:80%;

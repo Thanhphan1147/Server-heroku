@@ -9,6 +9,7 @@ const Player = require('./Player.js');
 var port = process.env.PORT || 8080;
 
 //Variables and function declaration
+var range = 200;
 var index = 0;
 var size = 4;
 
@@ -155,9 +156,20 @@ io.on('connection', (socket) => {
       io.emit('message',mes);
     })
 
+    socket.on('blink', (data) => {
+      var pos = JSON.parse(data);
+      for (var i = 0; i < index; i++) {
+          if (pool[i].id === pos.id) {
+            pool[i].x += range*pos.cos;
+            pool[i].y += range*pos.sin;
+          }
+      }
+    })
+
     socket.on('disconnect', () => {
         for (var i = 0; i < index; i++) {
-            if (pool[i].socket === socket.id) {
+            if (pool[i].id === socket.id) {
+              io.in('active').emit('disconnect',JSON.stringify(pool[i].id));
               pool[i].reset();                        //fix reload error where splice doesnt include method
               //console.log(pool[i].init);
               pool.splice(i,1);
@@ -210,7 +222,7 @@ setInterval( () => {
     Tick();
     io.in('active').emit('update', JSON.stringify(pool));
   }
-}, 1000/50);
+}, 1000/60);
 
 http.listen(port, function () {
     console.log('listening on port' + port);

@@ -3,6 +3,7 @@ socket = io();  // io() auto discover
 var size = 3;
 var index = 0;
 var col = "Red";
+var cd = 0;
 var stats = [size+1];
 for (var i = 0; i < size+1; i++) {
   stats[i] = {
@@ -136,6 +137,16 @@ function Game() {
                     case 13:
                         sendMessage();
                         break;
+                    case 81:
+                        if (cd === 0) {
+                          socket.emit('blink',JSON.stringify({
+                            id: game.player.id,
+                            cos: Math.cos(game.player.angle),
+                            sin: Math.sin(game.player.angle)
+                          }));
+                          cd = 60*5;
+                        }
+                        break;
                 }
             });
 
@@ -215,6 +226,9 @@ setInterval(() => {
   if (key.dx != 0 || key.dy != 0 || key.rotate) {
       socket.emit('input', JSON.stringify(key));
       key.rotate = false;
+  }
+  if (cd != 0) {
+    cd--;
   }
 },1000/60);
 
@@ -336,6 +350,22 @@ socket.on('message', (mes) => {
   game.chat.innerHTML += buf.name+":  "+buf.data+"<br>";
 })
 
+socket.on('disconnect', (data) => {
+  var id = JSON.parse(data);
+  for (var i = 0; i < index; i++) {
+      if (game.otherPlayers[i].id === id) {
+        game.otherPlayers[i].reset();                        //fix reload error where splice doesnt include method
+        //console.log(pool[i].init);
+        game.otherPlayers.splice(i,1);
+        game.otherPlayers.push(new Player());
+        //console.log(pool[size-1].init);
+        index--;
+      }
+  }
+})
+
+
+
 function Player() {
     this.id = 'N/A';
     this.x = 0;
@@ -394,6 +424,17 @@ function Player() {
         this.context.fillStyle = 'green';
         this.context.fill();
         this.context.stroke();
+    }
+
+    this.reset = function() {
+      this.connected = false;
+      this.id = 'N/A';
+      this.x = 0;
+      this.y = 0;
+      this.r = 24;
+      this.angle = 0;
+      this.color = 'undefined';
+      this.name = 'not connected';
     }
 }
 
