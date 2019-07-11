@@ -89,6 +89,33 @@ io.on('connection', (socket) => {
         pool[index].socket = socket.id;
         pool[index].id = socket.id;
         pool[index].name = player.name;
+        pool[index].role = player.role;
+        switch (pool[index].role) {
+          case "scout":
+            pool[index].maxHealth = 80;
+            pool[index].health = pool[index].maxHealth;
+            pool[index].speed = 2;
+            pool[index].damage = 10;
+            break;
+          case "heavy":
+            pool[index].maxHealth = 200;
+            pool[index].health = pool[index].maxHealth;
+            pool[index].speed = 0.5;
+            pool[index].damage = 8;
+            break;
+          case "sniper":
+            pool[index].maxHealth = 50;
+            pool[index].health = pool[index].maxHealth;
+            pool[index].speed = 1;
+            pool[index].damage = 20;
+            break;
+          default:
+            this.damage = 10;
+            this.speed = 1;
+            this.maxHealth = 100;
+            this.health = this.maxHealth;
+            break;
+        }
         pool[index].init(randomX(), randomY(), player.color);
         //console.log('added');
         console.log(JSON.stringify(pool[index]));
@@ -103,12 +130,12 @@ io.on('connection', (socket) => {
         var pos = JSON.parse(key);
         for (var i = 0; i < index; i++) {
           if(pool[i].id === pos.id) {
-            pool[i].x = pool[i].x + pos.dx;
-            pool[i].y = pool[i].y + pos.dy;
+            pool[i].x = pool[i].x + pos.dx*pool[i].speed;
+            pool[i].y = pool[i].y + pos.dy*pool[i].speed;
             pool[i].angle = pos.angle;
             if (ColisionDetector(i) || pool[i].x + pool[i].r >= 1853 || pool[i].y + pool[i].r >= 951 || pool[i].x - pool[i].r <= 0 || pool[i].y + pool[i].r <= 0) {
-                pool[i].x = pool[i].x - pos.dx;
-                pool[i].y = pool[i].y - pos.dy;
+                pool[i].x = pool[i].x - pos.dx*pool[i].speed;
+                pool[i].y = pool[i].y - pos.dy*pool[i].speed;
             }
           }
         }
@@ -197,18 +224,18 @@ function Tick() {
       if(j != i) {
         if(LineCollision(a, b, {x: pool[j].x,y: pool[j].y - pool[j].r}, {x: pool[j].x,y: pool[j].y + pool[j].r})) {
           pool[i].arrow.reset();
-          if(pool[j].health > 10) {
-            pool[j].health -= 10;
+          if(pool[j].health > pool[i].damage) {
+            pool[j].health -= pool[i].damage;
           } else {
             pool[j].x = randomX();
             pool[j].y = randomY();
-            pool[j].health = 100;
+            pool[j].health = pool[j].maxHealth;
             pool[i].kills++;
           }
         }
       }
     }
-    if(pool[i].arrow.x >= 1000) {
+    if(pool[i].arrow.x >= 900) {
       pool[i].arrow.reset();
     }
     pool[i].arrow.update();

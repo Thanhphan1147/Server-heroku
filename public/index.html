@@ -120,7 +120,7 @@
 				<div class="card-deck">
 					<div class="card border border-dark bg-secondary">
 						<div class="card-body">
-						
+
 					      <p class="card-text">Test version for bootstrap home page</p>
 								<p class="card-text">Reserved for update log</p>
 								<!--<p class="card-text">bootstrap = noob css</p>-->
@@ -142,13 +142,29 @@
 			    </div>
 			    <div class="card border border-dark bg-secondary">
 						<div class="card-body">
-							<h3>Choose your color</h3>
-				  		<button type="button" class="m-1 btn btn-primary" onclick="setColor1()">Blue</button>
-				  		<button type="button" class="m-1 btn btn-success" onclick="setColor2()">Green</button>
-				  		<button type="button" class="m-1 btn btn-info" onclick="setColor3()">Teal</button><br>
-				  		<button type="button" class="m-1 btn btn-warning" onclick="setColor4()">Yellow</button>
-				  		<button type="button" class="m-1 btn btn-danger" onclick="setColor5()">Pink</button>
-				  		<button type="button" class="m-1 btn btn-dark" onclick="setColor6()">Black</button>
+							<h3>Choose your color:</h3>
+
+				  		<button type="button" class="m-1 btn btn-primary" onclick="setColor('Blue')">Blue</button>
+				  		<button type="button" class="m-1 btn btn-success" onclick="setColor('Green')">Green</button>
+				  		<button type="button" class="m-1 btn btn-info" onclick="setColor('Teal')">Teal</button><br>
+				  		<button type="button" class="m-1 btn btn-warning" onclick="setColor('Yellow')">Yellow</button>
+				  		<button type="button" class="m-1 btn btn-danger" onclick="setColor('Pink')">Pink</button>
+				  		<button type="button" class="m-1 btn btn-dark" onclick="setColor('Black')">Black</button><br>
+							<h3>Choose your class:</h3>
+							<div class="btn-group-toggle" data-toggle="buttons">
+								<label class="btn btn-dark active" onclick="setClass('scout')">
+							    <input type="radio" name="options" id="option1" autocomplete="off" checked>
+									<i class="fa fa-bolt" aria-hidden="true"></i>
+							  </label>
+								<label class="btn btn-dark active" onclick="setClass('sniper')">
+							    <input type="radio" name="options" id="option1" autocomplete="off" checked>
+									<i class="fa fa-eye" aria-hidden="true"></i>
+							  </label>
+								<label class="btn btn-dark active" onclick="setClass('heavy')">
+							    <input type="radio" name="options" id="option1" autocomplete="off" checked>
+									<i class="fa fa-heart" aria-hidden="true"></i>
+							  </label>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -3,6 +3,7 @@ socket = io();  // io() auto discover
 var size = 3;
 var index = 0;
 var col = "Red";
+var job = "defaut";
 var cd = 0;
 var stats = [size+1];
 for (var i = 0; i < size+1; i++) {
@@ -14,7 +15,8 @@ for (var i = 0; i < size+1; i++) {
 console.log(stats);
 var preload = {
     name: "N/A",
-    color: col               //red by defaut
+    color: col,
+    role: job                //red by defaut
 }
 
 var key = {
@@ -35,23 +37,13 @@ setInterval( () => {
   console.log(col);
 }, 500)
 **/
-function setColor1() {
-  col = "Blue";
+function setColor(cl) {
+  col = cl;
+  //console.log(col);
 }
-function setColor2() {
-  col = "Green";
-}
-function setColor3() {
-  col = "Teal";
-}
-function setColor4() {
-  col = "Yellow";
-}
-function setColor5() {
-  col = "Pink";
-}
-function setColor6() {
-  col = "Black";
+function setClass(cl) {
+  job = cl;
+  //console.log(job);
 }
 
 function Preload() {
@@ -61,9 +53,11 @@ function Preload() {
     var pl = document.getElementById('pl');
     preload.name = pl.value;
     preload.color = col;
+    preload.role = job;
     preloaddiv.style.display = 'none';
     rbox.style.display = 'block';
     lbox.style.display = 'block';
+    //console.log(preload);
     socket.emit('newplayer', JSON.stringify(preload));
 }
 

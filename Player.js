@@ -10,9 +10,13 @@ module.exports = class Player {
     this.angle = 0;
     this.color = 'undefined';
     this.name = 'not connected';
-    this.arrow = new Arrow();
-    this.health = 100;
+    this.role = 'defaut';
+    this.damage = 10;
+    this.speed = 1;
+    this.maxHealth = 100;
+    this.health = this.maxHealth;
     this.kills = 0;
+    this.arrow = new Arrow();
   }
 
     init(x, y, color) {
